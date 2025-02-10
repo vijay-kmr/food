@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Food Guide</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; background-color: #f4f4f4; }
+        .container { max-width: 800px; margin: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        input { width: 100%; padding: 8px; margin-top: 10px; }
+        .dark-mode { background-color: #333; color: white; }
+        .dark-mode table { border-color: #777; }
+        .dark-mode th { background-color: #222; }
+        .toggle-btn { padding: 10px; background: #4CAF50; color: white; border: none; cursor: pointer; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Daily Food Guide</h2>
+        <input type="text" id="search" onkeyup="filterTable()" placeholder="Search for food...">
+        <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        
+        <table id="foodTable">
+            <thead>
+                <tr>
+                    <th>Food</th>
+                    <th>Eat or Avoid?</th>
+                    <th>Best Time to Eat</th>
+                    <th>Alternatives</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Oatmeal</td><td>Eat</td><td>Breakfast</td><td>Quinoa, Brown Rice</td></tr>
+                <tr><td>Soy Milk</td><td>Avoid</td><td>Separate from other foods</td><td>Almond Milk, Coconut Milk</td></tr>
+                <tr><td>Leafy Greens (cooked)</td><td>Eat</td><td>Lunch, Dinner</td><td>Spinach, Kale (cooked)</td></tr>
+                <tr><td>Raw Cruciferous Vegetables</td><td>Avoid</td><td>Limit raw, prefer cooked</td><td>Steamed Broccoli, Cooked Cabbage</td></tr>
+                <tr><td>Turmeric Tea</td><td>Eat</td><td>Evening</td><td>Ginger Tea, Chamomile Tea</td></tr>
+                <tr><td>Processed Foods</td><td>Avoid</td><td>Completely remove</td><td>Fresh Fruits, Homemade Snacks</td></tr>
+                <tr><td>Green Tea</td><td>Limit</td><td>After meals</td><td>Herbal Tea</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function filterTable() {
+            let input = document.getElementById("search");
+            let filter = input.value.toLowerCase();
+            let table = document.getElementById("foodTable");
+            let tr = table.getElementsByTagName("tr");
+            
+            for (let i = 1; i < tr.length; i++) {
+                let td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    let txtValue = td.textContent || td.innerText;
+                    tr[i].style.display = txtValue.toLowerCase().indexOf(filter) > -1 ? "" : "none";
+                }
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+    </script>
+</body>
+</html>
